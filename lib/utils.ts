@@ -1,10 +1,8 @@
-/* eslint-disable prefer-spread */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type ClassValue, clsx } from "clsx";
 import qs from "qs";
 import { twMerge } from "tailwind-merge";
 
-import { aspectRatioOptions } from "../constants";
+import { aspectRatioOptions } from "@/constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -136,9 +134,9 @@ export const deepMergeObjects = (obj1: any, obj2: any) => {
     return obj1;
   }
 
-  const output = { ...obj2 };
+  let output = { ...obj2 };
 
-  for (const key in obj1) {
+  for (let key in obj1) {
     if (obj1.hasOwnProperty(key)) {
       if (
         obj1[key] &&
