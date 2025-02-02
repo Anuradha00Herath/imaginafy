@@ -14,7 +14,7 @@ import {
 
 import { Button } from "@/components/ui/button"
 import {
-  Form
+  Form,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { aspectRatioOptions, creditFee, defaultValues, transformationTypes } from "@/constants"
@@ -98,7 +98,7 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
           if(newImage) {
             form.reset()
             setImage(data)
-            router.push(`/transformation/${newImage._id}`)
+            router.push(`/transformations/${newImage._id}`)
           }
         } catch (error) {
           console.log(error);
@@ -113,11 +113,11 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
               _id: data._id
             },
             userId,
-            path: `/transformation/${data._id}`
+            path: `/transformations/${data._id}`
           })
 
           if(updatedImage) {
-            router.push(`/transformation/${updatedImage._id}`)
+            router.push(`/transformations/${updatedImage._id}`)
           }
         } catch (error) {
           console.log(error);
@@ -131,7 +131,7 @@ const TransformationForm = ({ action, data = null, userId, type, creditBalance, 
   const onSelectFieldHandler = (value: string, onChangeField: (value: string) => void) => {
     const imageSize = aspectRatioOptions[value as AspectRatioKey]
 
-    setImage((prevState: object) => ({
+    setImage((prevState: any) => ({
       ...prevState,
       aspectRatio: imageSize.aspectRatio,
       width: imageSize.width,
