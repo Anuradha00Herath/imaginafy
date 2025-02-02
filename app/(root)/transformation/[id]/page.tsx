@@ -9,7 +9,12 @@ import { getImageSize } from "@/lib/utils";
 import { auth } from "@clerk/nextjs/server";
 import { DeleteConfirmation } from "@/components/shared/DeleteConfirmation";
 
-const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
+interface SearchParamProps {
+  params: Promise<{ id: string }>;
+}
+
+const ImageDetails = async ({ params }: SearchParamProps) => {
+  const { id } = await params; 
   const { userId } = await auth();
 
   const image = await getImageById(id);

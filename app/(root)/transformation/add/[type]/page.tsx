@@ -5,9 +5,28 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { getUserById } from "@/lib/actions/user.actions";
 
-const AddTransformationTypePage = async ({
-  params: { type },
-}: SearchParamProps) => {
+interface TransformationType {
+  type: string;
+  title: string;
+  subTitle: string;
+  config: Record<string, boolean>;
+  icon: string;
+}
+
+type TransformationTypes = {
+  restore: TransformationType;
+  removeBackground: TransformationType;
+  fill: TransformationType;
+  remove: TransformationType;
+  recolor: TransformationType;
+};
+
+interface SearchParamProps {
+  params: Promise<{ type: keyof TransformationTypes }>;
+}
+
+const AddTransformationTypePage = async ({params}: SearchParamProps) => {
+   const { type } = await params;
   const { userId } = await auth();
   const transformation = transformationTypes[type];
   if (!userId) redirect("/sign-in");

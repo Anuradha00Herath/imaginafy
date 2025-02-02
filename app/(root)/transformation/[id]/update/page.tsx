@@ -6,8 +6,12 @@ import TransformationForm from "@/components/shared/TransformationForm";
 import { transformationTypes } from "@/constants";
 import { getUserById } from "@/lib/actions/user.actions";
 import { getImageById } from "@/lib/actions/image.actions";
+interface SearchParamProps {
+  params: Promise<{ id: string }>;
+}
 
-const Page = async ({ params: { id } }: SearchParamProps) => {
+const Page = async ({ params }: SearchParamProps) => {
+  const { id } = await params; 
   const { userId } = await auth();
 
   if (!userId) redirect("/sign-in");
